@@ -34,9 +34,12 @@ function Register() {
 
       const API_URL = import.meta.env.VITE_API_URL;
 
-axios.post(`${API_URL}/auth/register`, data)
+      const response = await axios.post(
+        `${API_URL}/auth/register`,
+        formData
+      );
 
-      toast.success(response.data.message);
+      toast.success(response.data.message || "Registration Successful!");
 
       setFormData({
         name: "",
@@ -47,7 +50,11 @@ axios.post(`${API_URL}/auth/register`, data)
       navigate("/login");
 
     } catch (error) {
-      toast.error(error.response?.data?.message || "Registration Failed");
+      console.error("Registration Error:", error);
+
+      toast.error(
+        error.response?.data?.message || "Registration Failed"
+      );
     } finally {
       setLoading(false);
     }
@@ -60,7 +67,6 @@ axios.post(`${API_URL}/auth/register`, data)
         subtitle="Start planning your next adventure"
       >
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <InputField
             type="text"
             name="name"
@@ -99,7 +105,6 @@ axios.post(`${API_URL}/auth/register`, data)
               Login
             </Link>
           </p>
-
         </form>
       </AuthCard>
     </AuthLayout>

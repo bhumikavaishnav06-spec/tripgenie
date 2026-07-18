@@ -31,11 +31,9 @@ function Login() {
     try {
       setLoading(true);
 
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData
-      );
+      const API_URL = import.meta.env.VITE_API_URL;
 
+axios.post(`${API_URL}/auth/login`, data)
       localStorage.setItem("token", response.data.token);
       localStorage.setItem(
         "user",

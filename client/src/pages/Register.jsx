@@ -32,10 +32,9 @@ function Register() {
     try {
       setLoading(true);
 
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+      const API_URL = import.meta.env.VITE_API_URL;
+
+axios.post(`${API_URL}/auth/register`, data)
 
       toast.success(response.data.message);
 

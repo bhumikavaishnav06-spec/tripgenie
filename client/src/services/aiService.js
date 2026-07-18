@@ -1,7 +1,9 @@
 import axios from "axios";
 
-const AI_API = "http://127.0.0.1:5000/api/ai";
-const TRIP_API = "http://127.0.0.1:5000/api/trips";
+const API_URL = import.meta.env.VITE_API_URL;
+
+const AI_API = `$https://tripgenie-2.onrender.com/api/ai}/ai`;
+const TRIP_API = `$https://tripgenie-2.onrender.com/api/trips/trips`;
 
 // =======================
 // Generate AI Trip

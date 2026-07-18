@@ -33,19 +33,28 @@ function Login() {
 
       const API_URL = import.meta.env.VITE_API_URL;
 
-axios.post(`${API_URL}/auth/login`, data)
+      const response = await axios.post(
+        `${API_URL}/auth/login`,
+        formData
+      );
+
       localStorage.setItem("token", response.data.token);
       localStorage.setItem(
         "user",
         JSON.stringify(response.data.user)
       );
 
-      toast.success("Login Successful!");
+      toast.success(
+        response.data.message || "Login Successful!"
+      );
 
       navigate("/dashboard");
-
     } catch (error) {
-    toast.error(error.response?.data?.message || "Login Failed");
+      console.error(error);
+
+      toast.error(
+        error.response?.data?.message || "Login Failed"
+      );
     } finally {
       setLoading(false);
     }
@@ -58,7 +67,6 @@ axios.post(`${API_URL}/auth/login`, data)
         subtitle="Login to continue your journey"
       >
         <form onSubmit={handleSubmit} className="space-y-4">
-
           <InputField
             type="email"
             name="email"
@@ -89,7 +97,6 @@ axios.post(`${API_URL}/auth/login`, data)
               Register
             </Link>
           </p>
-
         </form>
       </AuthCard>
     </AuthLayout>

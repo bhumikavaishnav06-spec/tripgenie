@@ -39,7 +39,9 @@ function Register() {
         formData
       );
 
-      toast.success(response.data.message || "Registration Successful!");
+      toast.success(
+        response.data.message || "Registration Successful!"
+      );
 
       setFormData({
         name: "",
@@ -48,9 +50,8 @@ function Register() {
       });
 
       navigate("/login");
-
     } catch (error) {
-      console.error("Registration Error:", error);
+      console.error(error);
 
       toast.error(
         error.response?.data?.message || "Registration Failed"
@@ -86,7 +87,7 @@ function Register() {
           <InputField
             type="password"
             name="password"
-            placeholder="Create a password"
+            placeholder="Create your password"
             value={formData.password}
             onChange={handleChange}
           />
